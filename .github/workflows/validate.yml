@@ -1,0 +1,35 @@
+name: Validate site
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Validate tracker JSON
+        run: python -m json.tool data/tracker.json > /dev/null
+
+      - name: Check JavaScript syntax
+        run: find assets/js -name '*.js' -print0 | xargs -0 -n1 node --check
+
+      - name: Verify required site files
+        run: |
+          test -f index.html
+          test -f admin.html
+          test -f assets/css/styles.css
+          test -f assets/js/app.js
+          test -f data/tracker.json

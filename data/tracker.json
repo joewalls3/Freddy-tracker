@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "meta": {
+    "siteTitle": "Where's Freddy?",
+    "tagline": "Following the internet's favorite German World Cup fan as he road-trips across the United States and Canada.",
+    "profileUrl": "https://x.com/FreddyLA7",
+    "updatedAt": "2026-06-14T15:42:00-04:00",
+    "tripStart": "2026-06-03T12:00:00+02:00",
+    "timezone": "America/New_York",
+    "disclaimer": "Unofficial fan-made tracker based on public posts and published reporting."
+  },
+  "current": {
+    "city": "Houston",
+    "region": "Texas",
+    "headline": "In Houston for Germany's opening World Cup match",
+    "detail": "Freddy arrived after driving across the South and received a Houston welcome arranged by J.J. Watt."
+  },
+  "nextStops": [
+    {"city":"Oklahoma City","region":"Oklahoma","date":"2026-06-18","status":"reported","note":"Reported invitation to meet Ella Langley at her concert."},
+    {"city":"Toronto","region":"Ontario","date":"2026-06-20","status":"planned","note":"Expected next World Cup destination for Germany's following match."}
+  ],
+  "route": [
+    {"city":"New York City","region":"New York","lat":40.7128,"lng":-74.0060},
+    {"city":"Atlanta","region":"Georgia","lat":33.7490,"lng":-84.3880},
+    {"city":"Chattanooga","region":"Tennessee","lat":35.0456,"lng":-85.3097},
+    {"city":"Auburn","region":"Alabama","lat":32.6099,"lng":-85.4808},
+    {"city":"Mobile Bay","region":"Alabama","lat":30.6954,"lng":-88.0399},
+    {"city":"New Orleans","region":"Louisiana","lat":29.9511,"lng":-90.0715},
+    {"city":"Baton Rouge","region":"Louisiana","lat":30.4515,"lng":-91.1871},
+    {"city":"Houston","region":"Texas","lat":29.7604,"lng":-95.3698}
+  ],
+  "updates": [
+    {"id":"houston-welcome","date":"2026-06-14T10:30:00-05:00","category":"people","title":"J.J. Watt delivers a serious Houston welcome","summary":"A stay at the Post Oak Hotel, local food, and a personalized Texans jersey were among the surprises arranged for Freddy and his friends.","location":{"city":"Houston","region":"Texas"},"source":{"label":"Chron","url":"https://www.chron.com/sports/article/freddy-germany-houston-jj-watt-22304650.php"}},
+    {"id":"houston-arrival","date":"2026-06-13T23:00:00-05:00","category":"location","title":"Freddy reaches Houston","summary":"The group drove into downtown Houston late Saturday after the long trip across the South.","location":{"city":"Houston","region":"Texas"},"source":{"label":"Houston Chronicle","url":"https://www.houstonchronicle.com/world-cup/article/freddy-german-world-cup-jj-watt-houston-hotel-22304517.php"}},
+    {"id":"okc-invitation","date":"2026-06-13T15:00:00-05:00","category":"people","title":"An Ella Langley meetup is reportedly on the schedule","summary":"After her music became the soundtrack of the trip, Freddy said the group had been given an opportunity to meet Ella Langley at her June 18 Oklahoma City concert.","location":{"city":"Oklahoma City","region":"Oklahoma"},"source":{"label":"Chron","url":"https://www.chron.com/sports/article/freddy-germany-houston-jj-watt-22304650.php"}},
+    {"id":"louisiana-leg","date":"2026-06-13T12:00:00-05:00","category":"location","title":"New Orleans and Baton Rouge","summary":"Freddy's route continued through Louisiana before the final push west to Houston.","location":{"city":"Baton Rouge","region":"Louisiana"},"source":{"label":"Houston Chronicle","url":"https://www.houstonchronicle.com/world-cup/article/freddy-german-world-cup-jj-watt-houston-hotel-22304517.php"}},
+    {"id":"road-trip-stops","date":"2026-06-12T12:00:00-05:00","category":"food","title":"The American road-trip checklist keeps growing","summary":"Buc-ee's, Bass Pro Shops, Raising Cane's, Walmart, Chili's, Waffle House, and other stops became part of the viral travel diary.","location":{"city":"Mobile Bay","region":"Alabama"},"source":{"label":"New York Post","url":"https://nypost.com/2026/06/12/lifestyle/german-world-cup-tourist-goes-viral-eating-his-way-across-america/"}},
+    {"id":"auburn","date":"2026-06-10T20:00:00-05:00","category":"match","title":"Jordan-Hare Stadium becomes a major viral moment","summary":"Freddy attended Argentina vs. Iceland in Auburn and reacted to the stadium and eagle flyover with full European-mind-can-not-comprehend energy.","location":{"city":"Auburn","region":"Alabama"},"source":{"label":"New York Post","url":"https://nypost.com/2026/06/12/lifestyle/german-world-cup-tourist-goes-viral-eating-his-way-across-america/"}},
+    {"id":"waffle","date":"2026-06-08T01:00:00-04:00","category":"food","title":"The Waffle House review takes off","summary":"A late-night Waffle House visit in Georgia earned a 10/10 and became one of the trip's breakout posts.","location":{"city":"Atlanta","region":"Georgia"},"source":{"label":"People","url":"https://people.com/german-soccer-fan-goes-viral-as-he-discovers-u-s-food-spots-in-world-cup-road-trip-11995387"}},
+    {"id":"start","date":"2026-06-03T12:00:00+02:00","category":"viral","title":"Six weeks, hand luggage, and mostly jerseys","summary":"Freddy announced the start of a six-week World Cup trip through the United States and Canada.","location":{"city":"Germany","region":""},"source":{"label":"New York Post","url":"https://nypost.com/2026/06/12/lifestyle/german-world-cup-tourist-goes-viral-eating-his-way-across-america/"}}
+  ]
+}

@@ -1,99 +1,47 @@
 # Where's Freddy?
 
-A polished, static, GitHub Pages–friendly tracker for Freddy's public 2026 World Cup road-trip updates.
+A static, GitHub Pages–friendly tracker for Freddy's public World Cup road-trip updates.
 
-## What is included
+## Architecture
 
-- Responsive public tracker
-- Approximate city-level route map
-- Current location and upcoming stops
-- Filterable update timeline
-- Source links for every update
-- Stale-data warning
-- Browser-based update helper
-- No framework, database, API key, or build step
+```text
+index.html                              Public page shell
+admin.html                              Browser-based update helper
+assets/css/styles.css                   Shared design system
+assets/js/app.js                        Application bootstrap and events
+assets/js/admin.js                      Update-helper controller
+assets/js/services/tracker-service.js   Data loading and schema validation
+assets/js/views/dashboard-view.js       Current status and summary cards
+assets/js/views/timeline-view.js        Filterable update timeline
+assets/js/views/map-view.js             Leaflet map with a no-CDN fallback
+assets/js/utils/dom.js                  Safe DOM helpers
+data/tracker.json                       Single source of truth for tracker content
+```
 
-## Deploy to GitHub Pages
+The UI, data, map, and update workflow are separated so the project can grow without rewriting the entire site.
 
-1. Create a new **public** GitHub repository. A name like `freddy-tracker` works well.
-2. Upload every file and folder from this project to the repository's `main` branch.
-3. Open the repository's **Settings**.
-4. Select **Pages** in the left sidebar.
-5. Under **Build and deployment**, choose **Deploy from a branch**.
-6. Select `main` and `/(root)`, then save.
-7. GitHub will publish the site at:
+## Updating content
 
-   `https://YOUR-USERNAME.github.io/REPOSITORY-NAME/`
+Open the deployed `admin.html`, load the live tracker, add an update, and download the validated `tracker.json`. Replace `data/tracker.json` in GitHub and commit.
 
-The `.nojekyll` file is intentional. Keep it in the repository.
+## GitHub Pages
 
-## Update the tracker
+In repository **Settings → Pages**, publish from the `main` branch and `/(root)` folder.
 
-### Easy method
+Project URL:
 
-1. Open `admin.html` on the live site.
-2. Load the current data.
-3. Fill out the new update.
-4. Download the generated `tracker.json`.
-5. Replace `data/tracker.json` in GitHub and commit.
+```text
+https://joewalls3.github.io/Freddy-tracker/
+```
 
-### Direct method
-
-Edit `data/tracker.json`.
-
-Important fields:
-
-- `meta.updatedAt`: update this whenever the data changes.
-- `current`: the latest city-level status.
-- `nextStops`: reported or planned upcoming stops.
-- `route`: cities shown on the map.
-- `updates`: timeline entries, newest first.
-
-## Test locally
-
-Browsers normally block `fetch()` when a site is opened directly from the file system. Run a tiny local server instead:
+## Local testing
 
 ```bash
 python3 -m http.server 8000
 ```
 
-Then open:
+Then open `http://localhost:8000`.
 
-```text
-http://localhost:8000
-```
+## Privacy rules
 
-## Data policy
-
-This project is intentionally limited to:
-
-- Public posts
-- Published reporting
-- Approximate city-level locations
-- Links to sources
-
-Do not add private information, hotels that have not already been publicly disclosed, precise coordinates, personal contact information, or speculative real-time positioning.
-
-## Technical structure
-
-```text
-.
-├── index.html
-├── styles.css
-├── app.js
-├── admin.html
-├── admin.js
-├── data/
-│   └── tracker.json
-├── .nojekyll
-├── LICENSE
-└── README.md
-```
-
-## Customization
-
-The design is controlled through CSS variables at the top of `styles.css`. The site's title, X profile, current status, route, and timeline live in `data/tracker.json`.
-
-## License
-
-MIT. Reporting, logos, names, and linked source material remain the property of their respective owners.
+Use public posts and published reporting only. Keep locations at city level. Do not add private contact information, unpublished hotels, or precise real-time coordinates.

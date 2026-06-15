@@ -2,47 +2,105 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#0b0d12">
   <meta name="description" content="An unofficial public-update tracker for Freddy's World Cup road trip.">
   <title>Where's Freddy?</title>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-  <style>
-    :root{color-scheme:dark;--bg:#0b0d12;--panel:#131821;--panel2:#191f2a;--text:#f5f7fb;--muted:#9ca7b8;--line:rgba(255,255,255,.1);--gold:#f2c94c;--red:#e53e4d;--blue:#7cb7ff;--green:#61d995;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-width:320px;background:radial-gradient(circle at 10% 0,rgba(229,62,77,.13),transparent 28rem),radial-gradient(circle at 100% 15%,rgba(242,201,76,.1),transparent 30rem),var(--bg);color:var(--text);line-height:1.55}a{color:inherit}.shell{width:min(1160px,calc(100% - 30px));margin:auto}.top{position:sticky;top:0;z-index:999;border-bottom:1px solid var(--line);background:rgba(11,13,18,.8);backdrop-filter:blur(18px)}nav{height:72px;display:flex;align-items:center;justify-content:space-between;gap:18px}.brand{display:flex;align-items:center;gap:11px;text-decoration:none;font-weight:850}.mark{width:39px;height:39px;display:grid;place-items:center;border-radius:12px;background:linear-gradient(#111 0 33%,#d63a46 33% 66%,#e5b83b 66%);box-shadow:inset 0 0 0 2px rgba(255,255,255,.08)}.actions{display:flex;gap:9px}.btn{border:1px solid var(--line);border-radius:12px;padding:10px 14px;background:rgba(255,255,255,.04);color:white;text-decoration:none;font:inherit;font-weight:750;cursor:pointer}.btn.primary{background:white;color:#111;border-color:white}.hero{min-height:400px;display:grid;grid-template-columns:1.2fr .8fr;align-items:center;gap:60px;padding:66px 0 38px}.eyebrow{display:flex;align-items:center;gap:9px;color:#ccd3df;font-size:.77rem;font-weight:850;letter-spacing:.1em;text-transform:uppercase}.dot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 0 5px rgba(97,217,149,.12)}h1{font-size:clamp(3.4rem,8vw,7rem);line-height:.9;letter-spacing:-.075em;margin:20px 0 24px}.lead{max-width:670px;color:#d5dbe5;font-size:clamp(1.05rem,1.8vw,1.35rem)}.meta{color:var(--muted);font-size:.83rem}.flag{width:min(100%,390px);aspect-ratio:1.45;overflow:hidden;border-radius:30px;transform:rotate(4deg);box-shadow:0 30px 80px rgba(0,0,0,.38);display:flex;flex-direction:column}.flag i{flex:1}.flag i:nth-child(1){background:#111}.flag i:nth-child(2){background:#d53643}.flag i:nth-child(3){background:#e7b936}.cards{display:grid;grid-template-columns:1.2fr 1fr .8fr;gap:16px;margin-bottom:72px}.card,.panel,.update{border:1px solid var(--line);background:linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,255,255,.022));box-shadow:0 18px 55px rgba(0,0,0,.18)}.card{padding:24px;border-radius:22px;min-height:205px}.label,.kicker{color:var(--muted);font-size:.72rem;font-weight:850;letter-spacing:.1em;text-transform:uppercase}.current h2{font-size:2rem;letter-spacing:-.04em;margin:25px 0 5px}.current p{margin:0;color:#d4dbe6}.current .detail{color:var(--muted);font-size:.9rem;margin-top:22px}.next{display:grid;gap:12px;margin-top:20px}.stop{display:grid;grid-template-columns:48px 1fr;gap:12px;border-top:1px solid var(--line);padding-top:12px}.stop:first-child{border:0;padding-top:0}.date{border:1px solid var(--line);border-radius:10px;text-align:center;padding:5px}.date b,.date span{display:block}.date span{font-size:.65rem;color:var(--muted);text-transform:uppercase}.stop h3{font-size:.96rem;margin:0}.stop p{font-size:.8rem;color:var(--muted);margin:3px 0}.stats{display:grid;gap:15px;margin-top:25px}.stat{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--line);padding-bottom:10px}.stat:last-child{border:0}.stat b{font-size:1.8rem}.stat span{font-size:.78rem;color:var(--muted)}.grid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(280px,.65fr);gap:18px;margin-bottom:82px}.panel{border-radius:26px;padding:24px}.panel h2,.section h2{margin:5px 0 0;font-size:clamp(1.6rem,3vw,2.2rem);letter-spacing:-.045em}#map{height:470px;margin-top:22px;border-radius:19px;overflow:hidden;background:#171b21}.mapnote{font-size:.76rem;color:var(--muted)}.rules{display:grid;gap:16px;margin-top:25px}.rule{display:grid;grid-template-columns:38px 1fr;gap:12px}.num{width:38px;height:38px;border:1px solid var(--line);border-radius:11px;display:grid;place-items:center;color:var(--gold);font-size:.7rem;font-weight:900}.rule p{margin:0;color:var(--muted);font-size:.88rem}.rule strong{color:white}.section{padding-bottom:85px}.sectionhead{display:flex;justify-content:space-between;align-items:end;gap:18px;margin-bottom:28px}.filters{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end}.filter{border:1px solid var(--line);border-radius:999px;padding:8px 12px;background:rgba(255,255,255,.025);color:var(--muted);font:inherit;font-size:.77rem;font-weight:750;cursor:pointer}.filter.active{background:white;color:#111}.timeline{display:grid;gap:14px}.update{border-radius:18px;padding:21px 23px}.upTop{display:flex;justify-content:space-between;gap:15px}.update h3{margin:0;font-size:1.12rem}.badge{font-size:.65rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--blue)}.update p{color:#b8c1cf;font-size:.91rem;margin:10px 0 14px}.updateMeta{display:flex;flex-wrap:wrap;gap:8px 16px;color:var(--muted);font-size:.75rem}.source{color:#b9d9ff;text-decoration:none;font-weight:750}.source:hover{text-decoration:underline}footer{border-top:1px solid var(--line);padding:48px 0;color:var(--muted);font-size:.8rem}.foot{display:flex;justify-content:space-between;gap:30px}.toast{position:fixed;right:18px;bottom:18px;padding:12px 15px;border:1px solid var(--line);border-radius:12px;background:#202733;opacity:0;transform:translateY(12px);transition:.18s;pointer-events:none}.toast.show{opacity:1;transform:none}.leaflet-control-attribution{background:rgba(11,13,18,.8)!important;color:#ddd!important}.leaflet-control-attribution a{color:#9dccff!important}.leaflet-popup-content-wrapper,.leaflet-popup-tip{background:#131821;color:white}
-    @media(max-width:950px){.hero{grid-template-columns:1fr}.flag{display:none}.cards{grid-template-columns:1fr 1fr}.card:last-child{grid-column:1/-1}.stats{grid-template-columns:repeat(3,1fr)}.stat{display:block;border:0}.stat span{display:block}.grid{grid-template-columns:1fr}.about{order:-1}}
-    @media(max-width:680px){.shell{width:min(100% - 22px,1160px)}.top{position:static}.actions button{display:none}.hero{padding-top:48px;min-height:auto}.cards{grid-template-columns:1fr}.card:last-child{grid-column:auto}.sectionhead{align-items:flex-start;flex-direction:column}.filters{justify-content:flex-start}#map{height:380px}.foot{flex-direction:column}.upTop{flex-direction:column}.badge{order:-1}}
-  </style>
+  <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
-<header class="top"><nav class="shell"><a class="brand" href="./"><span class="mark">F</span><span>Where's Freddy?</span></a><div class="actions"><button class="btn" id="share">Share</button><a class="btn primary" href="https://x.com/FreddyLA7" target="_blank" rel="noopener">Follow on X</a></div></nav></header>
-<main>
-<section class="hero shell"><div><div class="eyebrow"><span class="dot"></span>Unofficial public-update tracker</div><h1>Where's<br>Freddy?</h1><p class="lead">Following the internet's favorite German World Cup fan as he road-trips across the United States and Canada.</p><p class="meta" id="updated"></p></div><div class="flag" aria-hidden="true"><i></i><i></i><i></i></div></section>
-<section class="cards shell"><article class="card current"><div class="label">Current reported location</div><h2 id="where"></h2><p id="headline"></p><p class="detail" id="detail"></p></article><article class="card"><div class="label">Coming up</div><div class="next" id="next"></div></article><article class="card"><div class="label">Trip snapshot</div><div class="stats"><div class="stat"><b id="cities"></b><span>route stops</span></div><div class="stat"><b id="updates"></b><span>tracked updates</span></div><div class="stat"><b id="days"></b><span>days into trip</span></div></div></article></section>
-<section class="grid shell"><article class="panel"><div class="kicker">Route</div><h2>Where he's been</h2><div id="map"></div><p class="mapnote">Approximate city-level locations only. No precise or live positioning.</p></article><aside class="panel about"><div class="kicker">How it works</div><h2>Fast updates, without being creepy</h2><p style="color:var(--muted)">This tracker only records city-level updates Freddy has already shared publicly or reputable outlets have reported.</p><div class="rules"><div class="rule"><span class="num">01</span><p><strong>No private data.</strong><br>Public information only.</p></div><div class="rule"><span class="num">02</span><p><strong>No exact tracking.</strong><br>Locations stay at city level.</p></div><div class="rule"><span class="num">03</span><p><strong>Every item sourced.</strong><br>Open the original coverage.</p></div></div></aside></section>
-<section class="section shell"><div class="sectionhead"><div><div class="kicker">Trip log</div><h2>Latest updates</h2></div><div class="filters" id="filters"><button class="filter active" data-f="all">All</button><button class="filter" data-f="location">Locations</button><button class="filter" data-f="food">Food</button><button class="filter" data-f="match">Matches</button><button class="filter" data-f="people">People</button><button class="filter" data-f="viral">Viral</button></div></div><div class="timeline" id="timeline"></div></section>
-</main>
-<footer><div class="shell foot"><div><strong style="color:white">Where's Freddy?</strong><br>Unofficial fan-made tracker based on public posts and reporting.</div><div>Not affiliated with Freddy, X, FIFA, or the World Cup.</div></div></footer><div class="toast" id="toast">Link copied.</div>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script>
-const data={updatedAt:'2026-06-14T15:42:00-04:00',current:{city:'Houston',region:'Texas',headline:"In Houston for Germany's opening World Cup match",detail:'Freddy arrived after driving across the South and received a Houston welcome arranged by J.J. Watt.'},next:[{city:'Oklahoma City',region:'Oklahoma',date:'2026-06-18',note:'Reported invitation to meet Ella Langley at her concert.'},{city:'Toronto',region:'Ontario',date:'2026-06-20',note:"Expected next World Cup destination for Germany's following match."}],route:[['New York City','New York',40.7128,-74.006],['Atlanta','Georgia',33.749,-84.388],['Chattanooga','Tennessee',35.0456,-85.3097],['Auburn','Alabama',32.6099,-85.4808],['Mobile Bay','Alabama',30.6954,-88.0399],['New Orleans','Louisiana',29.9511,-90.0715],['Baton Rouge','Louisiana',30.4515,-91.1871],['Houston','Texas',29.7604,-95.3698]],updates:[
-{id:'houston-welcome',date:'2026-06-14T10:30:00-05:00',cat:'people',title:'J.J. Watt delivers a serious Houston welcome',summary:'A stay at the Post Oak Hotel, local food, and a personalized Texans jersey were among the surprises arranged for Freddy and his friends.',city:'Houston, Texas',source:'Chron',url:'https://www.chron.com/sports/article/freddy-germany-houston-jj-watt-22304650.php'},
-{id:'houston-arrival',date:'2026-06-13T23:00:00-05:00',cat:'location',title:'Freddy reaches Houston',summary:'The group drove into downtown Houston late Saturday after the long trip across the South.',city:'Houston, Texas',source:'Houston Chronicle',url:'https://www.houstonchronicle.com/world-cup/article/freddy-german-world-cup-jj-watt-houston-hotel-22304517.php'},
-{id:'okc-invitation',date:'2026-06-13T15:00:00-05:00',cat:'people',title:'An Ella Langley meetup is reportedly on the schedule',summary:'After her music became the soundtrack of the trip, Freddy said the group had been given an opportunity to meet Ella Langley at her June 18 Oklahoma City concert.',city:'Oklahoma City, Oklahoma',source:'Chron',url:'https://www.chron.com/sports/article/freddy-germany-houston-jj-watt-22304650.php'},
-{id:'louisiana-leg',date:'2026-06-13T12:00:00-05:00',cat:'location',title:'New Orleans and Baton Rouge',summary:"Freddy's route continued through Louisiana before the final push west to Houston.",city:'Baton Rouge, Louisiana',source:'Houston Chronicle',url:'https://www.houstonchronicle.com/world-cup/article/freddy-german-world-cup-jj-watt-houston-hotel-22304517.php'},
-{id:'road-trip-stops',date:'2026-06-12T12:00:00-05:00',cat:'food',title:'The American road-trip checklist keeps growing',summary:"Buc-ee's, Bass Pro Shops, Raising Cane's, Walmart, Chili's, Waffle House, and other stops became part of the viral travel diary.",city:'Mobile Bay, Alabama',source:'New York Post',url:'https://nypost.com/2026/06/12/lifestyle/german-world-cup-tourist-goes-viral-eating-his-way-across-america/'},
-{id:'auburn',date:'2026-06-10T20:00:00-05:00',cat:'match',title:'Jordan-Hare Stadium becomes a major viral moment',summary:'Freddy attended Argentina vs. Iceland in Auburn and reacted to the stadium and eagle flyover with full European-mind-can-not-comprehend energy.',city:'Auburn, Alabama',source:'New York Post',url:'https://nypost.com/2026/06/12/lifestyle/german-world-cup-tourist-goes-viral-eating-his-way-across-america/'},
-{id:'waffle',date:'2026-06-08T01:00:00-04:00',cat:'food',title:'The Waffle House review takes off',summary:'A late-night Waffle House visit in Georgia earned a 10/10 and became one of the trip's breakout posts.',city:'Atlanta, Georgia',source:'People',url:'https://people.com/german-soccer-fan-goes-viral-as-he-discovers-u-s-food-spots-in-world-cup-road-trip-11995387'},
-{id:'start',date:'2026-06-03T12:00:00+02:00',cat:'viral',title:'Six weeks, hand luggage, and mostly jerseys',summary:'Freddy announced the start of a six-week World Cup trip through the United States and Canada.',city:'Germany',source:'New York Post',url:'https://nypost.com/2026/06/12/lifestyle/german-world-cup-tourist-goes-viral-eating-his-way-across-america/'}]};
-const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];let filter='all';
-const fmt=d=>new Intl.DateTimeFormat('en-US',{month:'short',day:'numeric',year:'numeric',timeZone:'America/New_York'}).format(new Date(d));
-$('#updated').textContent='Last updated '+new Intl.DateTimeFormat('en-US',{month:'short',day:'numeric',hour:'numeric',minute:'2-digit',timeZoneName:'short',timeZone:'America/New_York'}).format(new Date(data.updatedAt));
-$('#where').textContent=data.current.city+', '+data.current.region;$('#headline').textContent=data.current.headline;$('#detail').textContent=data.current.detail;$('#cities').textContent=data.route.length;$('#updates').textContent=data.updates.length;$('#days').textContent=Math.max(1,Math.floor((Date.now()-new Date('2026-06-03'))/86400000)+1);
-$('#next').innerHTML=data.next.map(x=>{const d=new Date(x.date+'T12:00:00'),m=d.toLocaleString('en-US',{month:'short'}),day=d.getDate();return `<div class="stop"><div class="date"><b>${day}</b><span>${m}</span></div><div><h3>${x.city}, ${x.region}</h3><p>${x.note}</p></div></div>`}).join('');
-function render(){const rows=data.updates.filter(x=>filter==='all'||x.cat===filter);$('#timeline').innerHTML=rows.map(x=>`<article class="update"><div class="upTop"><h3>${x.title}</h3><span class="badge">${x.cat}</span></div><p>${x.summary}</p><div class="updateMeta"><span>📍 ${x.city}</span><span>${fmt(x.date)}</span><a class="source" href="${x.url}" target="_blank" rel="noopener">Source: ${x.source} ↗</a></div></article>`).join('')||'<div class="update">No updates in this category yet.</div>'}render();
-$('#filters').addEventListener('click',e=>{const b=e.target.closest('[data-f]');if(!b)return;filter=b.dataset.f;$$('.filter').forEach(x=>x.classList.toggle('active',x===b));render()});
-const map=L.map('map',{scrollWheelZoom:false});L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18,attribution:'&copy; OpenStreetMap contributors'}).addTo(map);const pts=data.route.map(x=>[x[2],x[3]]);L.polyline(pts,{color:'#f2c94c',weight:3,dashArray:'7 9'}).addTo(map);data.route.forEach((x,i)=>L.circleMarker([x[2],x[3]],{radius:i===data.route.length-1?9:6,color:'#0b0d12',weight:3,fillColor:i===data.route.length-1?'#e53e4d':'#f5f7fb',fillOpacity:1}).bindPopup(`<b>${x[0]}</b><br>${x[1]}`).addTo(map));map.fitBounds(pts,{padding:[30,30],maxZoom:6});
-$('#share').addEventListener('click',async()=>{try{if(navigator.share)await navigator.share({title:"Where's Freddy?",text:`Freddy is currently reported in ${data.current.city}, ${data.current.region}.`,url:location.href});else{await navigator.clipboard.writeText(location.href);const t=$('#toast');t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200)}}catch(e){}});
-</script>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="topbar">
+    <nav class="shell nav" aria-label="Main navigation">
+      <a class="brand" href="./" aria-label="Where's Freddy home">
+        <span class="brand-mark" aria-hidden="true">F</span>
+        <span>Where's Freddy?</span>
+      </a>
+      <div class="nav-actions">
+        <button class="button button-secondary" id="refreshButton" type="button">Refresh</button>
+        <button class="button button-secondary" id="shareButton" type="button">Share</button>
+        <a class="button button-primary" id="profileLink" href="https://x.com/FreddyLA7" target="_blank" rel="noopener noreferrer">Follow on X</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero shell">
+      <div>
+        <div class="eyebrow"><span class="status-dot" aria-hidden="true"></span><span id="freshnessLabel">Loading tracker…</span></div>
+        <h1>Where's<br>Freddy?</h1>
+        <p class="lead" id="tagline">Following the internet's favorite German World Cup fan.</p>
+        <p class="meta" id="lastUpdated">Loading latest update…</p>
+      </div>
+      <div class="flag" aria-hidden="true"><i></i><i></i><i></i></div>
+    </section>
+
+    <section class="cards shell" aria-label="Current trip status">
+      <article class="card current-card">
+        <div class="label">Current reported location</div>
+        <h2 id="currentLocation">Loading…</h2>
+        <p id="currentHeadline"></p>
+        <p class="detail" id="currentDetail"></p>
+      </article>
+      <article class="card">
+        <div class="label">Coming up</div>
+        <div class="next-stops" id="nextStops"><div class="skeleton"></div><div class="skeleton"></div></div>
+      </article>
+      <article class="card">
+        <div class="label">Trip snapshot</div>
+        <div class="stats">
+          <div class="stat"><strong id="routeCount">—</strong><span>route stops</span></div>
+          <div class="stat"><strong id="updateCount">—</strong><span>tracked updates</span></div>
+          <div class="stat"><strong id="dayCount">—</strong><span>days into trip</span></div>
+        </div>
+      </article>
+    </section>
+
+    <section class="content-grid shell">
+      <article class="panel map-panel">
+        <div class="section-kicker">Route</div>
+        <h2>Where he's been</h2>
+        <div id="map" aria-label="Map showing Freddy's reported route"></div>
+        <p class="map-note" id="mapStatus">Approximate city-level locations only. No precise or live positioning.</p>
+      </article>
+      <aside class="panel about-panel">
+        <div class="section-kicker">How it works</div>
+        <h2>Fast updates, without being creepy</h2>
+        <p class="muted">Only public posts and reputable reporting are used.</p>
+        <div class="rules">
+          <div class="rule"><span>01</span><p><strong>No private data.</strong><br>Public information only.</p></div>
+          <div class="rule"><span>02</span><p><strong>No exact tracking.</strong><br>Locations stay at city level.</p></div>
+          <div class="rule"><span>03</span><p><strong>Every item sourced.</strong><br>Open the original coverage.</p></div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="timeline-section shell">
+      <div class="timeline-heading">
+        <div><div class="section-kicker">Trip log</div><h2>Latest updates</h2></div>
+        <div class="filters" id="filters" aria-label="Filter updates">
+          <button class="filter active" data-filter="all" type="button">All</button>
+          <button class="filter" data-filter="location" type="button">Locations</button>
+          <button class="filter" data-filter="food" type="button">Food</button>
+          <button class="filter" data-filter="match" type="button">Matches</button>
+          <button class="filter" data-filter="people" type="button">People</button>
+          <button class="filter" data-filter="viral" type="button">Viral</button>
+        </div>
+      </div>
+      <div class="timeline" id="timeline" aria-live="polite"><div class="notice">Loading updates…</div></div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell footer-content">
+      <div><strong>Where's Freddy?</strong><p id="disclaimer">Unofficial fan-made tracker.</p></div>
+      <a href="admin.html">Update helper</a>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <noscript><div class="noscript">JavaScript is required to load tracker updates.</div></noscript>
+  <script type="module" src="assets/js/app.js"></script>
 </body>
 </html>

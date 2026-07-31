@@ -5,7 +5,7 @@
     "tagline": "Following the internet's favorite German World Cup fan as he road-trips across the United States and Canada.",
     "profileUrl": "https://x.com/FreddyLA7",
     "instagramUrl": "https://www.instagram.com/freddyla7/",
-    "updatedAt": "2026-07-31T01:52:04-04:00",
+    "updatedAt": "2026-07-31T13:34:07-04:00",
     "tripStart": "2026-06-05T12:00:00-04:00",
     "tripEnd": "2026-07-23T23:59:00-04:00",
     "timezone": "America/New_York",
@@ -282,6 +282,7 @@
       "category": "scenery",
       "title": "The Instagram-only stretch begins in Connecticut",
       "summary": "After leaving Boston, the group took the quiet route through Connecticut and stopped around Kent Falls before crossing into Pennsylvania.",
+      "media": {"type":"story-recap"},
       "source": {"label":"Freddy's trip recap","url":"https://x.com/FreddyLA7/status/2076829404265599216"}
     },
     {
@@ -294,6 +295,7 @@
       "category": "road-trip",
       "title": "An overnight stop in the Poconos",
       "summary": "The route crossed from Connecticut into Pennsylvania and finished the day around Stroudsburg.",
+      "media": {"type":"story-recap"},
       "source": {"label":"Freddy's trip recap","url":"https://x.com/FreddyLA7/status/2076829404265599216"}
     },
     {
@@ -306,6 +308,7 @@
       "category": "small-town",
       "title": "A small-town Pennsylvania day",
       "summary": "Freddy explored Jim Thorpe during a back-road day that also included lakes and Pennsylvania history.",
+      "media": {"type":"story-recap"},
       "source": {"label":"Freddy's trip recap","url":"https://x.com/FreddyLA7/status/2076829404265599216"}
     },
     {
@@ -318,6 +321,7 @@
       "category": "history",
       "title": "Three Mile Island and Harrisburg",
       "summary": "The Pennsylvania leg continued past Three Mile Island and into the state capital before the group turned south toward Virginia.",
+      "media": {"type":"story-recap"},
       "source": {"label":"Freddy's trip recap","url":"https://x.com/FreddyLA7/status/2076829404265599216"}
     },
     {
@@ -342,6 +346,7 @@
       "category": "scenery",
       "title": "A Delaware beach day",
       "summary": "The post-holiday route reached the Delaware coast before continuing south along the Delmarva Peninsula.",
+      "media": {"type":"story-recap"},
       "source": {"label":"Freddy's trip recap","url":"https://x.com/FreddyLA7/status/2076829404265599216"}
     },
     {
@@ -354,6 +359,7 @@
       "category": "wildlife",
       "title": "Wild horses around Chincoteague and Assateague",
       "summary": "Freddy explored the barrier islands and their famous wild horses during the Instagram-only coastal stretch.",
+      "media": {"type":"story-recap"},
       "source": {"label":"Freddy's trip recap","url":"https://x.com/FreddyLA7/status/2076829404265599216"}
     },
     {
@@ -366,6 +372,7 @@
       "category": "wildlife",
       "title": "The Outer Banks—and a bear in the road",
       "summary": "The coastal drive reached North Carolina's Outer Banks, where a young black bear briefly blocked the route.",
+      "media": {"type":"story-recap"},
       "source": {"label":"Freddy's trip recap","url":"https://x.com/FreddyLA7/status/2076829404265599216"}
     },
     {
@@ -379,6 +386,7 @@
       "category": "scenery",
       "title": "Two days in Myrtle Beach",
       "summary": "The group slowed down for the beach, tourist stops, and mini golf before continuing down the South Carolina coast.",
+      "media": {"type":"story-recap"},
       "source": {"label":"Freddy's trip recap","url":"https://x.com/FreddyLA7/status/2076829404265599216"}
     },
     {
@@ -391,6 +399,7 @@
       "category": "history",
       "title": "The coastal route reaches Charleston",
       "summary": "Charleston added historic streets and another distinctly Southern stop before the drive toward Georgia.",
+      "media": {"type":"story-recap"},
       "source": {"label":"Freddy's trip recap","url":"https://x.com/FreddyLA7/status/2076829404265599216"}
     },
     {
@@ -403,6 +412,7 @@
       "category": "wildlife",
       "title": "Savannah, Spanish moss, and an alligator",
       "summary": "The Georgia day included a first Sonic visit, moss-covered Savannah streets, a wildlife refuge, and an alligator sighting.",
+      "media": {"type":"story-recap"},
       "source": {"label":"Freddy's trip recap","url":"https://x.com/FreddyLA7/status/2076829404265599216"}
     },
     {
@@ -415,6 +425,7 @@
       "category": "road-trip",
       "title": "A Georgia stop on the way inland",
       "summary": "The route moved from Savannah through Augusta before crossing back into South Carolina for Clemson.",
+      "media": {"type":"story-recap"},
       "source": {"label":"Freddy's trip recap","url":"https://x.com/FreddyLA7/status/2076829404265599216"}
     },
     {
@@ -514,6 +525,7 @@
       "category": "finale",
       "title": "The 49-day trip ends with a Washington VIP finale",
       "summary": "The final stop included the White House West Wing, U.S. Capitol, Washington Monument, major memorials, an all-American lunch, and the farewell trip to the airport.",
+      "media": {"type":"story-recap"},
       "source": {"label":"Axios","url":"https://www.axios.com/local/washington-dc/2026/07/23/viral-german-tourist-freddy-world-cup-dc"}
     }
   ],

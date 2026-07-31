@@ -1,6 +1,6 @@
 import { loadTrackerData } from "./services/tracker-service.js";
 import { renderDashboard } from "./views/dashboard-view.js";
-import { renderMap } from "./views/map-view.js?v=20260731-social-embeds";
+import { renderMap } from "./views/map-view.js?v=20260731-social-embeds-ready";
 import { renderTimeline } from "./views/timeline-view.js";
 import { select, selectAll } from "./utils/dom.js";
 

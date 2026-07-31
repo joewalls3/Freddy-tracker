@@ -26,6 +26,9 @@ export function renderDashboard(data) {
   select("#tagline").textContent = data.meta.tagline;
   select("#lastUpdated").textContent = `Last updated ${formatTimestamp(data.meta.updatedAt)}`;
   select("#profileLink").href = data.meta.profileUrl;
+  const instagramLink = select("#instagramLink");
+  if (data.meta.instagramUrl) instagramLink.href = data.meta.instagramUrl;
+  else instagramLink.hidden = true;
   select("#disclaimer").textContent = data.meta.disclaimer;
 
   const ageHours = (Date.now() - new Date(data.meta.updatedAt)) / 3_600_000;
@@ -39,7 +42,7 @@ export function renderDashboard(data) {
   const nextStops = select("#nextStops");
   clear(nextStops);
   if (data.nextStops.length === 0) {
-    nextStops.append(make("p", { className: "muted", text: "No reported next stop yet." }));
+    nextStops.append(make("p", { className: "muted", text: "No dated stop has been announced yet." }));
   }
   for (const stop of data.nextStops) {
     const item = make("div", { className: "next-stop" });
@@ -57,6 +60,7 @@ export function renderDashboard(data) {
 
   select("#routeCount").textContent = String(data.route.length);
   select("#updateCount").textContent = String(data.updates.length);
-  const elapsed = Math.max(1, Math.floor((Date.now() - new Date(data.meta.tripStart)) / 86_400_000) + 1);
+  const tripEnd = data.meta.tripEnd ? new Date(data.meta.tripEnd) : new Date();
+  const elapsed = Math.max(1, Math.floor((tripEnd - new Date(data.meta.tripStart)) / 86_400_000) + 1);
   select("#dayCount").textContent = String(elapsed);
 }

@@ -3,6 +3,7 @@ import { clear, make } from "../utils/dom.js";
 const LEAFLET_VERSION = "1.9.4";
 const LEAFLET_SCRIPT = `https://unpkg.com/leaflet@${LEAFLET_VERSION}/dist/leaflet.js`;
 const LEAFLET_STYLES = `https://unpkg.com/leaflet@${LEAFLET_VERSION}/dist/leaflet.css`;
+const X_WIDGETS_SCRIPT = "https://platform.twitter.com/widgets.js";
 const LOAD_TIMEOUT_MS = 6_000;
 const DATE_FORMATTER = new Intl.DateTimeFormat("en-US", {
   month: "short",
@@ -12,6 +13,7 @@ const DATE_FORMATTER = new Intl.DateTimeFormat("en-US", {
 });
 let mapInstance = null;
 let leafletPromise = null;
+let xWidgetsPromise = null;
 
 function locationName(stop) {
   return [stop.city, stop.region].filter(Boolean).join(", ");
@@ -49,6 +51,111 @@ function safeSource(source) {
   }
 }
 
+function instagramEmbed(source, stop) {
+  if (!source) return "";
+
+  const url = new URL(source.url);
+  if (!["instagram.com", "www.instagram.com"].includes(url.hostname)) return "";
+
+  const match = url.pathname.match(/^\/(?:[^/]+\/)?(p|reel)\/([A-Za-z0-9_-]+)\/?$/);
+  if (!match) return "";
+
+  const [, postType, shortcode] = match;
+  const embedUrl = `https://www.instagram.com/${postType}/${shortcode}/embed/captioned/`;
+  const title = `Instagram post for ${locationName(stop)}`;
+
+  return `
+    <div class="map-social-embed map-instagram-embed">
+      <iframe
+        src="${escapeHtml(embedUrl)}"
+        title="${escapeHtml(title)}"
+        loading="lazy"
+        allowtransparency="true"
+        scrolling="no"
+      ></iframe>
+    </div>
+  `;
+}
+
+function xEmbed(source, stop) {
+  if (!source) return "";
+
+  const url = new URL(source.url);
+  const allowedHosts = ["twitter.com", "www.twitter.com", "x.com", "www.x.com"];
+  if (!allowedHosts.includes(url.hostname) || !/^\/[^/]+\/status\/\d+\/?$/.test(url.pathname)) return "";
+
+  return `
+    <div class="map-social-embed map-x-embed">
+      <blockquote class="twitter-tweet" data-theme="dark" data-dnt="true">
+        <a href="${escapeHtml(source.url)}">View Freddy's ${escapeHtml(locationName(stop))} post on X</a>
+      </blockquote>
+    </div>
+  `;
+}
+
+function socialEmbed(stop, source) {
+  if (stop.media?.type === "story-recap") {
+    return '<span class="map-story-label">Instagram Story recap</span>';
+  }
+
+  return instagramEmbed(source, stop) || xEmbed(source, stop);
+}
+
+function loadXWidgets() {
+  if (window.twttr?.widgets) return Promise.resolve(window.twttr);
+  if (xWidgetsPromise) return xWidgetsPromise;
+
+  xWidgetsPromise = new Promise((resolve, reject) => {
+    const existing = document.querySelector('script[data-x-widgets]');
+    const script = existing ?? document.createElement("script");
+    const timer = window.setTimeout(() => reject(new Error("X embed timed out.")), LOAD_TIMEOUT_MS);
+
+    const finish = () => {
+      window.clearTimeout(timer);
+      if (window.twttr?.ready) window.twttr.ready(resolve);
+      else resolve(window.twttr ?? null);
+    };
+
+    script.addEventListener("load", finish, { once: true });
+    script.addEventListener(
+      "error",
+      () => {
+        window.clearTimeout(timer);
+        reject(new Error("X embed could not be downloaded."));
+      },
+      { once: true }
+    );
+
+    if (!existing) {
+      script.src = X_WIDGETS_SCRIPT;
+      script.async = true;
+      script.dataset.xWidgets = "true";
+      script.charset = "utf-8";
+      document.head.append(script);
+    }
+  }).catch((error) => {
+    xWidgetsPromise = null;
+    throw error;
+  });
+
+  return xWidgetsPromise;
+}
+
+function hydratePopupEmbeds(popup) {
+  const popupElement = popup.getElement();
+  if (!popupElement) return;
+
+  popupElement.querySelectorAll("iframe").forEach((frame) => {
+    frame.addEventListener("load", () => popup.update(), { once: true });
+  });
+
+  if (!popupElement.querySelector(".twitter-tweet")) return;
+  loadXWidgets()
+    .then((api) => api?.widgets?.load(popupElement))
+    .then(() => popup.update())
+    .catch((error) => console.warn(error));
+}
+
 function visitPopup(stop, index, routeLength) {
   const source = safeSource(stop.source);
   const sourceLink = source
@@ -57,6 +164,7 @@ function visitPopup(stop, index, routeLength) {
   const category = stop.category
     ? `<span class="map-popup-category">${escapeHtml(stop.category.replaceAll("-", " "))}</span>`
     : "";
+  const embed = socialEmbed(stop, source);
 
   return `
     <article class="map-popup-visit">
@@ -68,6 +176,7 @@ function visitPopup(stop, index, routeLength) {
       <time>${escapeHtml(formatVisitDate(stop))}</time>
       <strong>${escapeHtml(stop.title || "Route stop")}</strong>
       <p>${escapeHtml(stop.summary || "No additional details have been added for this stop yet.")}</p>
+      ${embed}
       ${sourceLink}
     </article>
   `;
@@ -240,13 +349,14 @@ export async function renderMap(container, statusElement, route) {
         `<div class="map-popup${visits.length > 1 ? " multiple" : ""}">
           ${visits.map(({ stop, index }) => visitPopup(stop, index, route.length)).join("")}
         </div>`,
-        { maxWidth: 350, minWidth: 260 }
+        { maxWidth: 430, minWidth: 280 }
       );
+      marker.on("popupopen", ({ popup }) => hydratePopupEmbeds(popup));
     });
 
     addLegend(L);
     mapInstance.fitBounds(points, { padding: [34, 34], maxZoom: 6 });
-    statusElement.textContent = `${route.length} documented visits. Select a numbered marker for dates, highlights, and sources.`;
+    statusElement.textContent = `${route.length} documented visits. Select a numbered marker for dates, recaps, and embedded posts.`;
     requestAnimationFrame(() => mapInstance?.invalidateSize());
   } catch (error) {
     console.warn(error);

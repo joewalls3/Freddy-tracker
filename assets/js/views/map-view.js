@@ -3,7 +3,6 @@ import { clear, make } from "../utils/dom.js";
 const LEAFLET_VERSION = "1.9.4";
 const LEAFLET_SCRIPT = `https://unpkg.com/leaflet@${LEAFLET_VERSION}/dist/leaflet.js`;
 const LEAFLET_STYLES = `https://unpkg.com/leaflet@${LEAFLET_VERSION}/dist/leaflet.css`;
-const X_WIDGETS_SCRIPT = "https://platform.twitter.com/widgets.js";
 const LOAD_TIMEOUT_MS = 6_000;
 const DATE_FORMATTER = new Intl.DateTimeFormat("en-US", {
   month: "short",
@@ -13,7 +12,6 @@ const DATE_FORMATTER = new Intl.DateTimeFormat("en-US", {
 });
 let mapInstance = null;
 let leafletPromise = null;
-let xWidgetsPromise = null;
 
 function locationName(stop) {
   return [stop.city, stop.region].filter(Boolean).join(", ");
@@ -82,13 +80,24 @@ function xEmbed(source, stop) {
 
   const url = new URL(source.url);
   const allowedHosts = ["twitter.com", "www.twitter.com", "x.com", "www.x.com"];
-  if (!allowedHosts.includes(url.hostname) || !/^\/[^/]+\/status\/\d+\/?$/.test(url.pathname)) return "";
+  const match = url.pathname.match(/^\/[^/]+\/status\/(\d+)\/?$/);
+  if (!allowedHosts.includes(url.hostname) || !match) return "";
+
+  const embedUrl = new URL("https://platform.twitter.com/embed/Tweet.html");
+  embedUrl.searchParams.set("id", match[1]);
+  embedUrl.searchParams.set("theme", "dark");
+  embedUrl.searchParams.set("dnt", "true");
+  const title = `X post for ${locationName(stop)}`;
 
   return `
     <div class="map-social-embed map-x-embed">
-      <blockquote class="twitter-tweet" data-theme="dark" data-dnt="true">
-        <a href="${escapeHtml(source.url)}">View Freddy's ${escapeHtml(locationName(stop))} post on X</a>
-      </blockquote>
+      <iframe
+        src="${escapeHtml(embedUrl.href)}"
+        title="${escapeHtml(title)}"
+        loading="lazy"
+        allowtransparency="true"
+        scrolling="no"
+      ></iframe>
     </div>
   `;
 }
@@ -101,46 +110,6 @@ function socialEmbed(stop, source) {
   return instagramEmbed(source, stop) || xEmbed(source, stop);
 }
 
-function loadXWidgets() {
-  if (window.twttr?.widgets) return Promise.resolve(window.twttr);
-  if (xWidgetsPromise) return xWidgetsPromise;
-
-  xWidgetsPromise = new Promise((resolve, reject) => {
-    const existing = document.querySelector('script[data-x-widgets]');
-    const script = existing ?? document.createElement("script");
-    const timer = window.setTimeout(() => reject(new Error("X embed timed out.")), LOAD_TIMEOUT_MS);
-
-    const finish = () => {
-      window.clearTimeout(timer);
-      if (window.twttr?.ready) window.twttr.ready(resolve);
-      else resolve(window.twttr ?? null);
-    };
-
-    script.addEventListener("load", finish, { once: true });
-    script.addEventListener(
-      "error",
-      () => {
-        window.clearTimeout(timer);
-        reject(new Error("X embed could not be downloaded."));
-      },
-      { once: true }
-    );
-
-    if (!existing) {
-      script.src = X_WIDGETS_SCRIPT;
-      script.async = true;
-      script.dataset.xWidgets = "true";
-      script.charset = "utf-8";
-      document.head.append(script);
-    }
-  }).catch((error) => {
-    xWidgetsPromise = null;
-    throw error;
-  });
-
-  return xWidgetsPromise;
-}
-
 function hydratePopupEmbeds(popup) {
   const popupElement = popup.getElement();
   if (!popupElement) return;
@@ -149,11 +118,6 @@ function hydratePopupEmbeds(popup) {
     frame.addEventListener("load", () => popup.update(), { once: true });
   });
 
-  if (!popupElement.querySelector(".twitter-tweet")) return;
-  loadXWidgets()
-    .then((api) => api?.widgets?.load(popupElement))
-    .then(() => popup.update())
-    .catch((error) => console.warn(error));
 }
 
 function visitPopup(stop, index, routeLength) {

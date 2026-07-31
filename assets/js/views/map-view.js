@@ -4,21 +4,123 @@ const LEAFLET_VERSION = "1.9.4";
 const LEAFLET_SCRIPT = `https://unpkg.com/leaflet@${LEAFLET_VERSION}/dist/leaflet.js`;
 const LEAFLET_STYLES = `https://unpkg.com/leaflet@${LEAFLET_VERSION}/dist/leaflet.css`;
 const LOAD_TIMEOUT_MS = 6_000;
+const DATE_FORMATTER = new Intl.DateTimeFormat("en-US", {
+  month: "short",
+  day: "numeric",
+  year: "numeric",
+  timeZone: "UTC"
+});
 let mapInstance = null;
 let leafletPromise = null;
+
+function locationName(stop) {
+  return [stop.city, stop.region].filter(Boolean).join(", ");
+}
+
+function formatDate(value) {
+  if (!value) return "";
+  const date = new Date(`${value}T12:00:00Z`);
+  return Number.isNaN(date.getTime()) ? value : DATE_FORMATTER.format(date);
+}
+
+function formatVisitDate(stop) {
+  const start = formatDate(stop.date);
+  const end = formatDate(stop.dateEnd);
+  return [start, end].filter(Boolean).join(" – ");
+}
+
+function escapeHtml(value = "") {
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+function safeSource(source) {
+  if (!source?.url || !source?.label) return null;
+  try {
+    const url = new URL(source.url);
+    if (!["http:", "https:"].includes(url.protocol)) return null;
+    return { label: source.label, url: url.href };
+  } catch {
+    return null;
+  }
+}
+
+function visitPopup(stop, index, routeLength) {
+  const source = safeSource(stop.source);
+  const sourceLink = source
+    ? `<a class="map-popup-source" href="${escapeHtml(source.url)}" target="_blank" rel="noopener noreferrer">View source: ${escapeHtml(source.label)} ↗</a>`
+    : "";
+  const category = stop.category
+    ? `<span class="map-popup-category">${escapeHtml(stop.category.replaceAll("-", " "))}</span>`
+    : "";
+
+  return `
+    <article class="map-popup-visit">
+      <div class="map-popup-meta">
+        <span>Stop ${index + 1} of ${routeLength}</span>
+        ${category}
+      </div>
+      <h3>${escapeHtml(locationName(stop))}</h3>
+      <time>${escapeHtml(formatVisitDate(stop))}</time>
+      <strong>${escapeHtml(stop.title || "Route stop")}</strong>
+      <p>${escapeHtml(stop.summary || "No additional details have been added for this stop yet.")}</p>
+      ${sourceLink}
+    </article>
+  `;
+}
+
+function groupVisits(route) {
+  const groups = new Map();
+
+  route.forEach((stop, index) => {
+    const key = `${stop.lat.toFixed(4)},${stop.lng.toFixed(4)}`;
+    const group = groups.get(key) ?? { lat: stop.lat, lng: stop.lng, visits: [] };
+    group.visits.push({ stop, index });
+    groups.set(key, group);
+  });
+
+  return [...groups.values()];
+}
 
 function renderFallback(container, route, message) {
   if (mapInstance) {
     mapInstance.remove();
     mapInstance = null;
   }
+
   clear(container);
   container.className = "map-fallback";
   container.append(make("strong", { text: message }));
-  const list = make("ol");
-  for (const stop of route) {
-    list.append(make("li", { text: [stop.city, stop.region].filter(Boolean).join(", ") }));
-  }
+  const list = make("ol", { className: "map-fallback-list" });
+
+  route.forEach((stop, index) => {
+    const item = make("li");
+    item.append(make("span", { className: "map-fallback-number", text: index + 1 }));
+    const content = make("div");
+    content.append(make("strong", { text: locationName(stop) }));
+    if (stop.date) content.append(make("time", { text: formatVisitDate(stop) }));
+    if (stop.title) content.append(make("b", { text: stop.title }));
+    if (stop.summary) content.append(make("p", { text: stop.summary }));
+
+    const source = safeSource(stop.source);
+    if (source) {
+      content.append(
+        make("a", {
+          className: "map-popup-source",
+          text: `View source: ${source.label} ↗`,
+          attrs: { href: source.url, target: "_blank", rel: "noopener noreferrer" }
+        })
+      );
+    }
+
+    item.append(content);
+    list.append(item);
+  });
+
   container.append(list);
 }
 
@@ -71,6 +173,26 @@ function loadLeaflet() {
   return leafletPromise;
 }
 
+function markerLabel(visits) {
+  if (visits.length === 1) return String(visits[0].index + 1);
+  return visits.map(({ index }) => index + 1).join("/");
+}
+
+function addLegend(L) {
+  const legend = L.control({ position: "bottomright" });
+  legend.onAdd = () => {
+    const element = L.DomUtil.create("div", "map-legend");
+    element.innerHTML = `
+      <strong>Route key</strong>
+      <span><i class="map-legend-dot start"></i>Trip start</span>
+      <span><i class="map-legend-dot stop"></i>Route stop</span>
+      <span><i class="map-legend-dot final"></i>Final stop</span>
+    `;
+    return element;
+  };
+  legend.addTo(mapInstance);
+}
+
 export async function renderMap(container, statusElement, route) {
   if (route.length === 0) {
     renderFallback(container, route, "No route stops have been added yet.");
@@ -95,23 +217,40 @@ export async function renderMap(container, statusElement, route) {
     tileLayer.addTo(mapInstance);
 
     const points = route.map((stop) => [stop.lat, stop.lng]);
-    L.polyline(points, { color: "#f2c94c", weight: 3, dashArray: "7 9" }).addTo(mapInstance);
-    route.forEach((stop, index) => {
-      const current = index === route.length - 1;
-      L.circleMarker([stop.lat, stop.lng], {
-        radius: current ? 9 : 6,
-        color: "#0b0d12",
-        weight: 3,
-        fillColor: current ? "#e53e4d" : "#f5f7fb",
-        fillOpacity: 1
-      }).bindPopup(`<strong>${stop.city}</strong><br>${stop.region ?? ""}`).addTo(mapInstance);
+    L.polyline(points, { color: "#f2c94c", weight: 3, dashArray: "7 9", opacity: 0.8 }).addTo(mapInstance);
+
+    groupVisits(route).forEach(({ lat, lng, visits }) => {
+      const isStart = visits.some(({ index }) => index === 0);
+      const isFinal = visits.some(({ index }) => index === route.length - 1);
+      const stateClass = isStart ? "start" : isFinal ? "final" : "stop";
+      const label = markerLabel(visits);
+      const icon = L.divIcon({
+        className: "route-marker-shell",
+        html: `<span class="route-marker ${stateClass}${visits.length > 1 ? " multiple" : ""}">${escapeHtml(label)}</span>`,
+        iconSize: [34, 34],
+        iconAnchor: [17, 17],
+        popupAnchor: [0, -18]
+      });
+      const marker = L.marker([lat, lng], {
+        icon,
+        title: visits.map(({ stop }) => locationName(stop)).join(" / ")
+      }).addTo(mapInstance);
+
+      marker.bindPopup(
+        `<div class="map-popup${visits.length > 1 ? " multiple" : ""}">
+          ${visits.map(({ stop, index }) => visitPopup(stop, index, route.length)).join("")}
+        </div>`,
+        { maxWidth: 350, minWidth: 260 }
+      );
     });
 
-    mapInstance.fitBounds(points, { padding: [30, 30], maxZoom: 6 });
+    addLegend(L);
+    mapInstance.fitBounds(points, { padding: [34, 34], maxZoom: 6 });
+    statusElement.textContent = `${route.length} documented visits. Select a numbered marker for dates, highlights, and sources.`;
     requestAnimationFrame(() => mapInstance?.invalidateSize());
   } catch (error) {
     console.warn(error);
-    renderFallback(container, route, "Interactive map unavailable. The route list is shown instead.");
-    statusElement.textContent = "The map service did not load; tracker updates are still working.";
+    renderFallback(container, route, "Interactive map unavailable. The detailed route list is shown instead.");
+    statusElement.textContent = "The map service did not load; all route details remain available below.";
   }
 }

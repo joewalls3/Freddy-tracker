@@ -4,21 +4,20 @@
     "siteTitle": "Where's Freddy?",
     "tagline": "Following the internet's favorite German World Cup fan as he road-trips across the United States and Canada.",
     "profileUrl": "https://x.com/FreddyLA7",
-    "updatedAt": "2026-06-14T15:42:00-04:00",
-    "tripStart": "2026-06-03T12:00:00+02:00",
+    "instagramUrl": "https://www.instagram.com/freddyla7/",
+    "updatedAt": "2026-07-31T01:39:26-04:00",
+    "tripStart": "2026-06-05T12:00:00-04:00",
+    "tripEnd": "2026-07-23T23:59:00-04:00",
     "timezone": "America/New_York",
     "disclaimer": "Unofficial fan-made tracker based on public posts and published reporting."
   },
   "current": {
-    "city": "Houston",
-    "region": "Texas",
-    "headline": "In Houston for Germany's opening World Cup match",
-    "detail": "Freddy arrived after driving across the South and received a Houston welcome arranged by J.J. Watt."
+    "city": "Hamburg",
+    "region": "Germany",
+    "headline": "Home after a 49-day North American road trip",
+    "detail": "Freddy returned home on July 24 and has since announced plans for another U.S. road trip this fall centered on college football."
   },
-  "nextStops": [
-    {"city":"Oklahoma City","region":"Oklahoma","date":"2026-06-18","status":"reported","note":"Reported invitation to meet Ella Langley at her concert."},
-    {"city":"Toronto","region":"Ontario","date":"2026-06-20","status":"planned","note":"Expected next World Cup destination for Germany's following match."}
-  ],
+  "nextStops": [],
   "route": [
     {"city":"New York City","region":"New York","lat":40.7128,"lng":-74.0060},
     {"city":"Atlanta","region":"Georgia","lat":33.7490,"lng":-84.3880},
@@ -27,9 +26,291 @@
     {"city":"Mobile Bay","region":"Alabama","lat":30.6954,"lng":-88.0399},
     {"city":"New Orleans","region":"Louisiana","lat":29.9511,"lng":-90.0715},
     {"city":"Baton Rouge","region":"Louisiana","lat":30.4515,"lng":-91.1871},
-    {"city":"Houston","region":"Texas","lat":29.7604,"lng":-95.3698}
+    {"city":"Houston","region":"Texas","lat":29.7604,"lng":-95.3698},
+    {"city":"Galveston","region":"Texas","lat":29.3013,"lng":-94.7977},
+    {"city":"Oklahoma City","region":"Oklahoma","lat":35.4676,"lng":-97.5164},
+    {"city":"Dallas","region":"Texas","lat":32.7767,"lng":-96.7970},
+    {"city":"Buffalo","region":"New York","lat":42.8864,"lng":-78.8784},
+    {"city":"Toronto","region":"Ontario","lat":43.6532,"lng":-79.3832},
+    {"city":"Niagara Falls","region":"Ontario","lat":43.0896,"lng":-79.0849},
+    {"city":"Elmore","region":"Ohio","lat":41.4762,"lng":-83.2952},
+    {"city":"Berlin","region":"Ohio","lat":40.5617,"lng":-81.7946},
+    {"city":"Beltzville Lake","region":"Pennsylvania","lat":40.8484,"lng":-75.6274},
+    {"city":"Mount Washington","region":"New Hampshire","lat":44.2706,"lng":-71.3033},
+    {"city":"Boston","region":"Massachusetts","lat":42.3601,"lng":-71.0589},
+    {"city":"Kent","region":"Connecticut","lat":41.7248,"lng":-73.4770},
+    {"city":"Stroudsburg","region":"Pennsylvania","lat":40.9868,"lng":-75.1946},
+    {"city":"Jim Thorpe","region":"Pennsylvania","lat":40.8759,"lng":-75.7324},
+    {"city":"Harrisburg","region":"Pennsylvania","lat":40.2732,"lng":-76.8867},
+    {"city":"Washington","region":"District of Columbia","lat":38.9072,"lng":-77.0369},
+    {"city":"Bethany Beach","region":"Delaware","lat":38.5396,"lng":-75.0552},
+    {"city":"Chincoteague","region":"Virginia","lat":37.9332,"lng":-75.3788},
+    {"city":"Outer Banks","region":"North Carolina","lat":35.9574,"lng":-75.6241},
+    {"city":"Myrtle Beach","region":"South Carolina","lat":33.6891,"lng":-78.8867},
+    {"city":"Charleston","region":"South Carolina","lat":32.7765,"lng":-79.9311},
+    {"city":"Savannah","region":"Georgia","lat":32.0809,"lng":-81.0912},
+    {"city":"Clemson","region":"South Carolina","lat":34.6834,"lng":-82.8374},
+    {"city":"Cherokee","region":"North Carolina","lat":35.4743,"lng":-83.3149},
+    {"city":"Ocoee","region":"Tennessee","lat":35.1276,"lng":-84.7202},
+    {"city":"Nashville","region":"Tennessee","lat":36.1627,"lng":-86.7816},
+    {"city":"Mammoth Cave","region":"Kentucky","lat":37.1870,"lng":-86.1003},
+    {"city":"Lexington","region":"Kentucky","lat":38.0406,"lng":-84.5037},
+    {"city":"West Virginia","region":"","lat":38.5976,"lng":-80.4549},
+    {"city":"Washington","region":"District of Columbia","lat":38.9072,"lng":-77.0369}
   ],
   "updates": [
+    {
+      "id": "fall-college-football-trip",
+      "date": "2026-07-29T12:00:00-04:00",
+      "category": "viral",
+      "title": "A fall college-football road trip is in the works",
+      "summary": "Freddy announced plans to return to the U.S. in September or October for college football and other distinctly American events. The early wish list includes Oktoberfest in Helen, the State Fair of Texas, and the Breeders' Cup at Keeneland; no fixed route has been announced.",
+      "location": {"city":"Hamburg","region":"Germany"},
+      "source": {"label":"Freddy on X","url":"https://x.com/FreddyLA7/status/2082595789134819385"}
+    },
+    {
+      "id": "home-in-hamburg",
+      "date": "2026-07-24T12:06:00-04:00",
+      "category": "location",
+      "title": "Home sweet home",
+      "summary": "Freddy posted from home in Hamburg after the overnight trip back from the United States.",
+      "location": {"city":"Hamburg","region":"Germany"},
+      "source": {"label":"Freddy on X","url":"https://x.com/FreddyLA7/status/2080625607553978667"}
+    },
+    {
+      "id": "farewell-america",
+      "date": "2026-07-23T12:00:00-04:00",
+      "category": "viral",
+      "title": "So long, America",
+      "summary": "After 49 days, Freddy and the group headed to the airport and closed out the World Cup road trip with a farewell post.",
+      "location": {"city":"Washington","region":"District of Columbia"},
+      "source": {"label":"Freddy on X","url":"https://x.com/FreddyLA7/status/2080441343776612773"}
+    },
+    {
+      "id": "washington-finale",
+      "date": "2026-07-21T15:00:00-04:00",
+      "category": "people",
+      "title": "The road trip ends with a Washington VIP day",
+      "summary": "The final major stop included tours of the White House West Wing, the U.S. Capitol, Washington Monument, and other monuments, plus an all-American lunch. Freddy's Instagram Day 47 and Day 48 highlights preserved the visit.",
+      "location": {"city":"Washington","region":"District of Columbia"},
+      "source": {"label":"Axios","url":"https://www.axios.com/local/washington-dc/2026/07/23/viral-german-tourist-freddy-world-cup-dc"}
+    },
+    {
+      "id": "west-virginia",
+      "date": "2026-07-19T17:03:00-04:00",
+      "category": "location",
+      "title": "West Virginia becomes state number 25",
+      "summary": "The group crossed into West Virginia, the final new state of the trip, before turning toward Washington for the closing stretch.",
+      "location": {"city":"West Virginia","region":""},
+      "source": {"label":"Freddy on X","url":"https://x.com/FreddyLA7/status/2078888463517045239"}
+    },
+    {
+      "id": "kentucky",
+      "date": "2026-07-18T16:00:00-04:00",
+      "category": "location",
+      "title": "Mammoth Cave, Keeneland, and Lexington",
+      "summary": "Freddy explored Mammoth Cave, learned about horse racing during a behind-the-scenes visit at Keeneland, and ate locally in Lexington.",
+      "location": {"city":"Lexington","region":"Kentucky"},
+      "source": {"label":"Kentucky Sports Radio","url":"https://www.on3.com/teams/kentucky-wildcats/news/famous-world-cup-tourist-freddy-visits-all-around-lexington/"}
+    },
+    {
+      "id": "nashville",
+      "date": "2026-07-17T18:00:00-04:00",
+      "category": "people",
+      "title": "Country music takes over the Nashville stop",
+      "summary": "The Tennessee leg included Ocoee, Nashville, the Country Music Hall of Fame, a Grand Ole Opry experience, and a last night on Broadway.",
+      "location": {"city":"Nashville","region":"Tennessee"},
+      "source": {"label":"Freddy on Instagram","url":"https://www.instagram.com/freddyla7/p/Da9ZqXklnAl/"}
+    },
+    {
+      "id": "first-mls-match",
+      "date": "2026-07-17T20:00:00-04:00",
+      "category": "match",
+      "title": "A first MLS match in Nashville",
+      "summary": "Freddy attended Nashville against Atlanta for the group's first MLS game and received upgraded hospitality at the stadium.",
+      "location": {"city":"Nashville","region":"Tennessee"},
+      "source": {"label":"Freddy on X","url":"https://x.com/FreddyLA7/status/2078295095204278546"}
+    },
+    {
+      "id": "cherokee-smokies",
+      "date": "2026-07-14T10:00:00-04:00",
+      "category": "location",
+      "title": "Clemson to Cherokee and the Smokies",
+      "summary": "The group continued from Clemson into the Great Smoky Mountains, stopped in Cherokee, North Carolina, and then turned toward Tennessee.",
+      "location": {"city":"Cherokee","region":"North Carolina"},
+      "source": {"label":"Freddy on X","url":"https://x.com/FreddyLA7/status/2077053096056738029"}
+    },
+    {
+      "id": "x-return",
+      "date": "2026-07-13T10:42:00-04:00",
+      "category": "viral",
+      "title": "Freddy returns to X from Clemson",
+      "summary": "After two weeks away, Freddy reactivated the account to document the last part of the road trip, saying supportive messages on Instagram convinced him to finish sharing it.",
+      "location": {"city":"Clemson","region":"South Carolina"},
+      "source": {"label":"Atlanta News First","url":"https://www.atlantanewsfirst.com/2026/07/14/freddy-rebooted-german-soccer-fan-who-reviewed-georgia-like-yelp-is-posting-again/"}
+    },
+    {
+      "id": "carolinas-savannah",
+      "date": "2026-07-10T12:00:00-04:00",
+      "category": "location",
+      "title": "Myrtle Beach, Charleston, Savannah, and Clemson",
+      "summary": "The coastal leg moved through Myrtle Beach and Charleston, then toward Savannah and Clemson. It included mini golf, a first Sonic visit, moss-covered streets, wildlife refuges, and an alligator sighting.",
+      "location": {"city":"Charleston","region":"South Carolina"},
+      "source": {"label":"Freddy's trip recap","url":"https://x.com/FreddyLA7/status/2076829404265599216"}
+    },
+    {
+      "id": "delaware-chincoteague-outer-banks",
+      "date": "2026-07-06T12:00:00-04:00",
+      "category": "location",
+      "title": "Beaches, wild horses, and the Outer Banks",
+      "summary": "Freddy's quieter Instagram-only stretch included Delaware beaches, Chincoteague and Assateague, the Outer Banks, and a young black bear blocking the road in North Carolina.",
+      "location": {"city":"Chincoteague","region":"Virginia"},
+      "source": {"label":"Freddy's trip recap","url":"https://x.com/FreddyLA7/status/2076829404265599216"}
+    },
+    {
+      "id": "fourth-of-july-dc",
+      "date": "2026-07-04T21:00:00-04:00",
+      "category": "viral",
+      "title": "A Fourth of July in Washington",
+      "summary": "The group celebrated America's 250th birthday in Washington with the National Mall crowd, fireworks, and the holiday flyovers.",
+      "location": {"city":"Washington","region":"District of Columbia"},
+      "source": {"label":"Freddy on Instagram","url":"https://www.instagram.com/freddyla7/p/DaZ2NbVFuOs/"}
+    },
+    {
+      "id": "pennsylvania-virginia",
+      "date": "2026-07-02T12:00:00-04:00",
+      "category": "location",
+      "title": "Pennsylvania lakes, small towns, and Virginia",
+      "summary": "On the route south from New England, the group swam in Pennsylvania lakes, visited Jim Thorpe, Three Mile Island, and Harrisburg, then watched a local football game and pie-eating contest in Virginia.",
+      "location": {"city":"Harrisburg","region":"Pennsylvania"},
+      "source": {"label":"Freddy's trip recap","url":"https://x.com/FreddyLA7/status/2076829404265599216"}
+    },
+    {
+      "id": "gordon-ramsay-boston",
+      "date": "2026-06-30T13:00:00-04:00",
+      "category": "food",
+      "title": "A Gordon Ramsay sendoff from Boston",
+      "summary": "The group's last Boston stop was lunch at Ramsay's Kitchen, where they tried New England specialties and received a video message from Gordon Ramsay after Germany's loss.",
+      "location": {"city":"Boston","region":"Massachusetts"},
+      "source": {"label":"Freddy on Instagram","url":"https://www.instagram.com/freddyla7/p/DaQm5JklsUn/"}
+    },
+    {
+      "id": "move-to-instagram",
+      "date": "2026-06-30T12:00:00-04:00",
+      "category": "viral",
+      "title": "The trip moves from X to Instagram",
+      "summary": "Freddy deactivated X after the conversation around the account became toxic, but said the road trip would continue and shifted daily updates to Instagram Stories.",
+      "location": {"city":"Boston","region":"Massachusetts"},
+      "source": {"label":"People","url":"https://people.com/viral-world-cup-fan-freddy-defends-deactivating-x-account-after-criticism-12010757"}
+    },
+    {
+      "id": "germany-exit",
+      "date": "2026-06-29T18:00:00-04:00",
+      "category": "match",
+      "title": "Germany exits, but the road trip continues",
+      "summary": "Paraguay eliminated Germany on penalties near Boston. With the flight home still scheduled for July 23, Freddy asked followers what the group should do next.",
+      "location": {"city":"Foxborough","region":"Massachusetts"},
+      "source": {"label":"Yahoo Sports","url":"https://sports.yahoo.com/soccer/article/world-cup-2026-freddy-the-viral-german-soccer-fan-vows-to-carry-on-his-journey-despite-germanys-stunning-exit-040055305.html"}
+    },
+    {
+      "id": "slammiversary",
+      "date": "2026-06-28T17:00:00-04:00",
+      "category": "people",
+      "title": "Slammiversary and the Hardy Boyz",
+      "summary": "Freddy attended TNA Slammiversary in Boston and met childhood wrestling heroes Matt and Jeff Hardy.",
+      "location": {"city":"Boston","region":"Massachusetts"},
+      "source": {"label":"Freddy on Instagram","url":"https://www.instagram.com/freddyla7/p/DaJpxK-FluN/"}
+    },
+    {
+      "id": "mount-washington",
+      "date": "2026-06-27T12:00:00-04:00",
+      "category": "location",
+      "title": "The road trip reaches Mount Washington",
+      "summary": "With the travel group temporarily down to two, Freddy reached the summit of Mount Washington, the highest peak in the northeastern United States.",
+      "location": {"city":"Mount Washington","region":"New Hampshire"},
+      "source": {"label":"Freddy on X","url":"https://x.com/FreddyLA7/status/2070991665867723243"}
+    },
+    {
+      "id": "small-town-ohio",
+      "date": "2026-06-24T15:00:00-04:00",
+      "category": "location",
+      "title": "Slower roads through small-town Ohio",
+      "summary": "The group deliberately avoided the interstates, stopping in Elmore and Berlin, Ohio. Freddy called Berlin one of his favorite places on the trip and encountered Amish horse-drawn buggies.",
+      "location": {"city":"Berlin","region":"Ohio"},
+      "source": {"label":"Freddy on X","url":"https://x.com/FreddyLA7/status/2069518643780596187"}
+    },
+    {
+      "id": "niagara-lake-ontario",
+      "date": "2026-06-22T20:00:00-04:00",
+      "category": "location",
+      "title": "Lake Ontario and Niagara Falls",
+      "summary": "After the Toronto match, Freddy explored the Lake Ontario shore and Niagara Falls before beginning the long, scenic route toward Boston.",
+      "location": {"city":"Niagara Falls","region":"Ontario"},
+      "source": {"label":"Freddy on X","url":"https://x.com/FreddyLA7/status/2068513642593587694"}
+    },
+    {
+      "id": "germany-ivory-coast",
+      "date": "2026-06-21T15:00:00-04:00",
+      "category": "match",
+      "title": "Germany vs. Ivory Coast in Toronto",
+      "summary": "After the last-minute flight scramble, Freddy made it to Toronto for Germany's second World Cup match, a 2-1 win over Ivory Coast.",
+      "location": {"city":"Toronto","region":"Ontario"},
+      "source": {"label":"Freddy on X","url":"https://x.com/FreddyLA7/status/2068417286730289193"}
+    },
+    {
+      "id": "flight-rescue",
+      "date": "2026-06-20T00:30:00-04:00",
+      "category": "people",
+      "title": "American Airlines and J.J. Watt rescue the Toronto trip",
+      "summary": "A weather-canceled Dallas connection threatened to make the group miss Germany's match. After a burst of public offers, American Airlines found seats to Buffalo, with J.J. Watt helping behind the scenes.",
+      "location": {"city":"Buffalo","region":"New York"},
+      "source": {"label":"WGRZ","url":"https://www.wgrz.com/article/sports/soccer/world-cup/world-cup-fan-freddy-coming-to-buffalo/71-ca8d66aa-5d76-437f-aa05-7021339d021b"}
+    },
+    {
+      "id": "ella-langley-concert",
+      "date": "2026-06-18T21:00:00-05:00",
+      "category": "people",
+      "title": "The Ella Langley meetup happens",
+      "summary": "Freddy's first country concert became a dream-come-true meetup with Ella Langley, the artist behind the road trip's soundtrack.",
+      "location": {"city":"Oklahoma City","region":"Oklahoma"},
+      "source": {"label":"Freddy on Instagram","url":"https://www.instagram.com/freddyla7/p/DZwic3kFlNV/"}
+    },
+    {
+      "id": "portugal-drc",
+      "date": "2026-06-17T16:19:00-05:00",
+      "category": "match",
+      "title": "Portugal vs. DR Congo in Houston",
+      "summary": "Freddy attended a second World Cup match in Houston to watch Cristiano Ronaldo and Portugal before the overnight drive to Oklahoma City.",
+      "location": {"city":"Houston","region":"Texas"},
+      "source": {"label":"Freddy on X","url":"https://x.com/FreddyLA7/status/2067281030889783525"}
+    },
+    {
+      "id": "nasa-johnson-space-center",
+      "date": "2026-06-16T14:00:00-05:00",
+      "category": "people",
+      "title": "A private NASA day at Johnson Space Center",
+      "summary": "Freddy met astronauts, sat inside the Orion capsule that flew Artemis II, and connected with the International Space Station during a major Houston highlight.",
+      "location": {"city":"Houston","region":"Texas"},
+      "source": {"label":"InsideHook","url":"https://www.insidehook.com/internet/freddyla7-world-cup-fan-not-psyop"}
+    },
+    {
+      "id": "houston-mayor-astros",
+      "date": "2026-06-15T19:00:00-05:00",
+      "category": "people",
+      "title": "Houston hospitality keeps escalating",
+      "summary": "The group ate barbecue with Houston police, met Mayor John Whitmire at an Astros game, received another J.J. Watt surprise, and squeezed in a late Galveston visit.",
+      "location": {"city":"Houston","region":"Texas"},
+      "source": {"label":"Houston Chronicle","url":"https://www.houstonchronicle.com/news/houston-texas/trending/article/german-soccer-fan-freddy-meets-mayor-whitmire-22307223.php"}
+    },
+    {
+      "id": "germany-curacao",
+      "date": "2026-06-14T15:00:00-05:00",
+      "category": "match",
+      "title": "Germany opens with a 7-1 win",
+      "summary": "Freddy watched Germany beat Curaçao 7-1 in Houston in the group's first World Cup match of the trip.",
+      "location": {"city":"Houston","region":"Texas"},
+      "source": {"label":"Freddy on X","url":"https://x.com/FreddyLA7/status/2066278200792007149"}
+    },
     {"id":"houston-welcome","date":"2026-06-14T10:30:00-05:00","category":"people","title":"J.J. Watt delivers a serious Houston welcome","summary":"A stay at the Post Oak Hotel, local food, and a personalized Texans jersey were among the surprises arranged for Freddy and his friends.","location":{"city":"Houston","region":"Texas"},"source":{"label":"Chron","url":"https://www.chron.com/sports/article/freddy-germany-houston-jj-watt-22304650.php"}},
     {"id":"houston-arrival","date":"2026-06-13T23:00:00-05:00","category":"location","title":"Freddy reaches Houston","summary":"The group drove into downtown Houston late Saturday after the long trip across the South.","location":{"city":"Houston","region":"Texas"},"source":{"label":"Houston Chronicle","url":"https://www.houstonchronicle.com/world-cup/article/freddy-german-world-cup-jj-watt-houston-hotel-22304517.php"}},
     {"id":"okc-invitation","date":"2026-06-13T15:00:00-05:00","category":"people","title":"An Ella Langley meetup is reportedly on the schedule","summary":"After her music became the soundtrack of the trip, Freddy said the group had been given an opportunity to meet Ella Langley at her June 18 Oklahoma City concert.","location":{"city":"Oklahoma City","region":"Oklahoma"},"source":{"label":"Chron","url":"https://www.chron.com/sports/article/freddy-germany-houston-jj-watt-22304650.php"}},
